@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jude Eshiemomoh — Petroleum Geoscientist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #05101f;
+      --navy2:  #091828;
+      --navy3:  #0d2239;
+      --gold:   #c8963e;
+      --gold2:  #e8b96a;
+      --gold-glow: rgba(200,150,62,0.18);
+      --slate:  #7a9ab8;
+      --light:  #d6e4f0;
+      --white:  #f0f6fc;
+      --muted:  #4a6d8c;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--light);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 5%;
+      background: rgba(5,16,31,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,150,62,0.12);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700; font-size: 1.1rem;
+      color: var(--gold); letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      color: var(--slate); font-size: 0.82rem; letter-spacing: 0.1em;
+      text-transform: uppercase; text-decoration: none;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--gold2); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 7rem 5% 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-grid-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(200,150,62,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,150,62,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-glow {
+      position: absolute; top: 10%; right: -10%;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,150,62,0.1) 0%, transparent 70%);
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 820px; }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.4rem;
+      border-left: 2px solid var(--gold); padding-left: 0.8rem;
+      opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 900; line-height: 1.05;
+      color: var(--white); margin-bottom: 1rem;
+      opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
+    }
+    .hero-name span { color: var(--gold); }
+    .hero-title {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--slate); font-weight: 400; letter-spacing: 0.04em;
+      margin-bottom: 2rem;
+      opacity: 0; animation: fadeUp 0.7s 0.6s forwards;
+    }
+    .hero-desc {
+      font-size: 1rem; color: var(--light); max-width: 580px;
+      opacity: 0.85; margin-bottom: 2.8rem;
+      opacity: 0; animation: fadeUp 0.7s 0.8s forwards;
+    }
+    .hero-cta {
+      display: inline-flex; gap: 1rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.7s 1s forwards;
+    }
+    .btn {
+      padding: 0.75rem 2rem; border-radius: 2px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      transition: all 0.25s; cursor: pointer; border: none;
+    }
+    .btn-primary {
+      background: var(--gold); color: var(--navy);
+      font-weight: 500;
+    }
+    .btn-primary:hover { background: var(--gold2); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent; color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+    .btn-outline:hover { background: var(--gold-glow); transform: translateY(-2px); }
+
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 5%;
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0; animation: fadeUp 0.7s 1.3s forwards;
+    }
+    .scroll-line {
+      width: 40px; height: 1px; background: var(--muted);
+      animation: scrollPulse 2s 1.5s infinite;
+    }
+
+    /* ── SECTIONS COMMON ── */
+    section { padding: 6rem 5%; }
+    .section-label {
+      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; color: var(--white);
+      margin-bottom: 3rem;
+      line-height: 1.2;
+    }
+    .divider {
+      width: 48px; height: 2px; background: var(--gold);
+      margin: 1rem 0 2.5rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--navy2); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1.6fr; gap: 5rem;
+      align-items: start;
+    }
+    .about-left { position: relative; }
+    .about-card {
+      background: var(--navy3);
+      border: 1px solid rgba(200,150,62,0.15);
+      padding: 2rem; border-radius: 4px;
+    }
+    .about-card-item { margin-bottom: 1.4rem; }
+    .about-card-item:last-child { margin-bottom: 0; }
+    .about-card-label {
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.2rem;
+    }
+    .about-card-value { color: var(--light); font-size: 0.95rem; }
+    .about-text { font-size: 1.02rem; color: var(--slate); line-height: 1.9; }
+    .about-text p + p { margin-top: 1.2rem; }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--navy); }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-card {
+      background: var(--navy3);
+      border: 1px solid rgba(200,150,62,0.1);
+      border-radius: 4px; padding: 1.8rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .skill-card:hover {
+      border-color: rgba(200,150,62,0.45);
+      transform: translateY(-4px);
+    }
+    .skill-icon {
+      font-size: 1.6rem; margin-bottom: 0.8rem;
+    }
+    .skill-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 600;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+    .skill-desc { font-size: 0.88rem; color: var(--slate); line-height: 1.7; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+    .tag {
+      font-size: 0.7rem; letter-spacing: 0.08em;
+      padding: 0.25rem 0.65rem; border-radius: 2px;
+      background: rgba(200,150,62,0.1); color: var(--gold2);
+      border: 1px solid rgba(200,150,62,0.2);
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--navy2); }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 0.4rem; bottom: 0;
+      width: 1px; background: rgba(200,150,62,0.2);
+    }
+    .timeline-item { position: relative; margin-bottom: 3.5rem; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot {
+      position: absolute; left: -2.42rem; top: 0.42rem;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--gold); box-shadow: 0 0 0 4px var(--gold-glow);
+    }
+    .exp-company {
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.3rem;
+    }
+    .exp-role {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; font-weight: 600; color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+    .exp-period {
+      font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem;
+    }
+    .exp-bullets { list-style: none; }
+    .exp-bullets li {
+      font-size: 0.93rem; color: var(--slate); margin-bottom: 0.55rem;
+      padding-left: 1.2rem; position: relative; line-height: 1.7;
+    }
+    .exp-bullets li::before {
+      content: '—'; position: absolute; left: 0; color: var(--gold);
+      font-size: 0.8rem; top: 0.15rem;
+    }
+    .exp-achievements {
+      margin-top: 1rem; padding: 1rem 1.2rem;
+      background: rgba(200,150,62,0.06);
+      border-left: 2px solid var(--gold); border-radius: 0 3px 3px 0;
+    }
+    .exp-achievements-label {
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.5rem;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--navy); }
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--navy3);
+      border: 1px solid rgba(200,150,62,0.1);
+      border-radius: 4px; padding: 2rem;
+      transition: border-color 0.3s, transform 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .project-card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; background: var(--gold);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+    .project-card:hover::after { transform: scaleX(1); }
+    .project-card:hover { border-color: rgba(200,150,62,0.3); transform: translateY(-4px); }
+    .project-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem; font-weight: 900; color: rgba(200,150,62,0.15);
+      line-height: 1; margin-bottom: 0.5rem;
+    }
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 600; color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .project-desc { font-size: 0.88rem; color: var(--slate); line-height: 1.75; }
+    .project-tech { margin-top: 1.2rem; }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--navy2);
+      text-align: center;
+    }
+    .contact-inner { max-width: 600px; margin: 0 auto; }
+    .contact-text { font-size: 1.05rem; color: var(--slate); margin-bottom: 2.5rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.6rem;
+      color: var(--light); text-decoration: none; font-size: 0.9rem;
+      padding: 0.9rem 1.8rem;
+      border: 1px solid rgba(200,150,62,0.25);
+      border-radius: 2px; background: var(--navy3);
+      transition: all 0.25s;
+    }
+    .contact-link:hover {
+      background: var(--gold-glow);
+      border-color: var(--gold); color: var(--gold2);
+    }
+    .contact-link svg { width: 18px; height: 18px; fill: currentColor; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 5%; text-align: center;
+      border-top: 1px solid rgba(200,150,62,0.1);
+      font-size: 0.78rem; color: var(--muted); letter-spacing: 0.05em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; } 50% { opacity: 1; }
+    }
+
+    /* Scroll-reveal */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 4%; }
+      .nav-links { gap: 1.2rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      section { padding: 4rem 5%; }
+    }
+    @media (max-width: 540px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">J.E.</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Petroleum Geoscientist · Nigeria</span>
+      <h1 class="hero-name">Jude<br /><span>Eshiemomoh</span></h1>
+      <p class="hero-title">3D Seismic Interpretation &nbsp;·&nbsp; Well Log & Petrophysical Analysis &nbsp;·&nbsp; Data Analytics</p>
+      <p class="hero-desc">
+        Subsurface geoscientist with 3–5 years of industry experience delivering seismic interpretation, reservoir evaluation, and data-driven insights across Nigeria's upstream oil and gas sector.
+      </p>
+      <div class="hero-cta">
+        <a href="#experience" class="btn btn-primary">View My Work</a>
+        <a href="#contact" class="btn btn-outline">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Scroll to explore
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-left reveal">
+        <p class="section-label">Who I Am</p>
+        <h2 class="section-title">About<br />Me</h2>
+        <div class="divider"></div>
+        <div class="about-card">
+          <div class="about-card-item">
+            <div class="about-card-label">Role</div>
+            <div class="about-card-value">Petroleum Geoscientist</div>
+          </div>
+          <div class="about-card-item">
+            <div class="about-card-label">Experience</div>
+            <div class="about-card-value">3–5 Years (Industry)</div>
+          </div>
+          <div class="about-card-item">
+            <div class="about-card-label">Location</div>
+            <div class="about-card-value">Nigeria</div>
+          </div>
+          <div class="about-card-item">
+            <div class="about-card-label">Software</div>
+            <div class="about-card-value">Petrel · GeoGraphix · Decision Space</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-right reveal">
+        <div class="about-text">
+          <p>
+            I am a Petroleum Geoscientist with hands-on experience across exploration and production workflows in Nigeria's upstream sector. My work spans 3D seismic interpretation, well log analysis, petrophysical evaluation, and static reservoir modelling — with a strong emphasis on translating subsurface data into actionable decisions.
+          </p>
+          <p>
+            At Chevron Nigeria Limited, I conducted detailed subsurface analysis across multiple fault blocks, generating pay zone cross-sections, fluid distribution maps, and shale distribution plots to support field development planning. Prior to that, at Reigh-Shore Energy Services, I delivered end-to-end G&G software support, seismic data management, and reservoir evaluation services for NAPIMS-FES clients.
+          </p>
+          <p>
+            I combine geoscience expertise with data analytics capabilities, enabling me to bring both technical rigour and quantitative insight to subsurface challenges. I am actively seeking new opportunities where I can contribute to high-impact exploration and development projects.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label reveal">Expertise</p>
+    <h2 class="section-title reveal">Core Skills</h2>
+    <div class="divider reveal"></div>
+    <div class="skills-grid">
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🗺️</div>
+        <div class="skill-name">3D Seismic Interpretation</div>
+        <div class="skill-desc">Horizon and fault interpretation, time-to-depth conversion, map generation, and volumetric calculations for reservoir characterisation and FDP support.</div>
+        <div class="skill-tags">
+          <span class="tag">Petrel</span>
+          <span class="tag">GeoGraphix</span>
+          <span class="tag">Decision Space</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">📊</div>
+        <div class="skill-name">Well Log & Petrophysical Analysis</div>
+        <div class="skill-desc">Wireline log interpretation, pay zone identification, fluid contact analysis, shale distribution plots, and cross-section generation for reservoir characterisation.</div>
+        <div class="skill-tags">
+          <span class="tag">Wireline Logs</span>
+          <span class="tag">Mudlog Data</span>
+          <span class="tag">Pay Zone Analysis</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">📈</div>
+        <div class="skill-name">Data Analytics</div>
+        <div class="skill-desc">Applying quantitative and data-driven approaches to subsurface datasets, fluid distribution mapping, and geoscience data QC and management.</div>
+        <div class="skill-tags">
+          <span class="tag">Data QC</span>
+          <span class="tag">Fluid Mapping</span>
+          <span class="tag">Volumetrics</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🏗️</div>
+        <div class="skill-name">Static Modelling & Volumetrics</div>
+        <div class="skill-desc">Building static geological models, computing Gross Rock Volume (GRV), and supporting field development plans through reservoir volumetric assessments.</div>
+        <div class="skill-tags">
+          <span class="tag">Static Modelling</span>
+          <span class="tag">GRV Calculation</span>
+          <span class="tag">FDP Support</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">💾</div>
+        <div class="skill-name">Seismic Data Management</div>
+        <div class="skill-desc">Seismic data loading, QC, media transcription (3590/3592 tape formats), well log digitisation, and end-to-end data lifecycle management for upstream clients.</div>
+        <div class="skill-tags">
+          <span class="tag">SEGY Loading</span>
+          <span class="tag">Media Transcription</span>
+          <span class="tag">Log Digitisation</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🖥️</div>
+        <div class="skill-name">G&G Software Support</div>
+        <div class="skill-desc">On-site technical support, installation, maintenance, and troubleshooting for industry-standard geoscience platforms across multi-client environments.</div>
+        <div class="skill-tags">
+          <span class="tag">Petrel</span>
+          <span class="tag">GeoGraphix</span>
+          <span class="tag">Licensing</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <p class="section-label reveal">Career History</p>
+    <h2 class="section-title reveal">Work Experience</h2>
+    <div class="divider reveal"></div>
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="exp-company">Chevron Nigeria Limited</div>
+        <div class="exp-role">Graduate Research Intern</div>
+        <div class="exp-period">September 2022 – September 2023</div>
+        <ul class="exp-bullets">
+          <li>Identified and gathered Mudlog and wireline log data across 4 non-cored and 2 cored fault blocks within the field of study.</li>
+          <li>Created cross-sections for pay zones of interest with resistivity &lt;5 ohmm across wells, confirming hydrocarbon pay intervals.</li>
+          <li>Generated fluid distribution maps for LRLC (Low Resistivity Low Contrast) reservoirs.</li>
+          <li>Produced shale distribution plots for selected wells across up-dip and down-dip positions of the structure.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="exp-company">Reigh-Shore Energy Services Limited</div>
+        <div class="exp-role">On-Site G&G Software Support, Data Management Expert & Geophysicist (NAPIMS-FES)</div>
+        <div class="exp-period">October 2019 – August 2022</div>
+        <ul class="exp-bullets">
+          <li>Provided on-site software support for GeoGraphix and Petrel platforms across client environments.</li>
+          <li>Managed and maintained seismic and well data, including loading, QC, and archiving.</li>
+          <li>Conducted seismic interpretation and generated 2D maps for reservoir evaluation of various fields.</li>
+          <li>Performed static modelling and volumetric calculations in support of Field Development Plans.</li>
+          <li>Executed fault and horizon interpretation on seismic data for FDP project deliverables.</li>
+          <li>Generated time maps, carried out depth map conversion, and computed Gross Rock Volumes for FDP projects.</li>
+          <li>Transcribed seismic field and processed data from legacy 3590 tape formats to modern 3592 tapes and hard drives.</li>
+          <li>Conducted well log digitisation and contributed to hardware troubleshooting across client systems.</li>
+        </ul>
+        <div class="exp-achievements">
+          <div class="exp-achievements-label">Key Achievements</div>
+          <ul class="exp-bullets">
+            <li>Renewed and maintained client GeoGraphix software licenses, ensuring uninterrupted operational continuity.</li>
+            <li>Delivered effective solutions to all geoscience software challenges presented by clients.</li>
+            <li>Led a comprehensive data management programme for seismic tape transcription and well log digitisation.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label reveal">Selected Work</p>
+    <h2 class="section-title reveal">Projects</h2>
+    <div class="divider reveal"></div>
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="project-number">01</div>
+        <div class="project-title">Multi-Fault Block Subsurface Study</div>
+        <div class="project-desc">Comprehensive petrophysical and stratigraphic analysis across 6 fault blocks (4 non-cored, 2 cored). Involved pay zone cross-sections, fluid distribution mapping for LRLC reservoirs, and shale distribution characterisation.</div>
+        <div class="project-tech">
+          <div class="skill-tags">
+            <span class="tag">Petrophysics</span>
+            <span class="tag">Well Log Analysis</span>
+            <span class="tag">Fluid Mapping</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-number">02</div>
+        <div class="project-title">Field Development Plan — Seismic Interpretation</div>
+        <div class="project-desc">Delivered full seismic interpretation workflow for an FDP project: fault and horizon picking, time map generation, depth conversion, and GRV computation to support volumetric assessment and development planning.</div>
+        <div class="project-tech">
+          <div class="skill-tags">
+            <span class="tag">Seismic Interpretation</span>
+            <span class="tag">GRV Calculation</span>
+            <span class="tag">Petrel</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-number">03</div>
+        <div class="project-title">Legacy Seismic Data Transcription Programme</div>
+        <div class="project-desc">Led the migration of seismic field and processed data from legacy 3590 tape media to modern 3592 tapes and hard drives for multiple clients, ensuring long-term data integrity and accessibility.</div>
+        <div class="project-tech">
+          <div class="skill-tags">
+            <span class="tag">Data Management</span>
+            <span class="tag">SEGY</span>
+            <span class="tag">Media Transcription</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-number">04</div>
+        <div class="project-title">Reservoir Evaluation — 2D Seismic Mapping</div>
+        <div class="project-desc">Conducted seismic interpretation and 2D structural map generation for reservoir evaluation across multiple Nigerian fields, providing critical input for exploration and appraisal decision-making.</div>
+        <div class="project-tech">
+          <div class="skill-tags">
+            <span class="tag">2D Seismic</span>
+            <span class="tag">GeoGraphix</span>
+            <span class="tag">Reservoir Evaluation</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="section-label reveal">Get In Touch</p>
+      <h2 class="section-title reveal">Let's Connect</h2>
+      <div class="divider reveal" style="margin-left: auto; margin-right: auto;"></div>
+      <p class="contact-text reveal">
+        I am open to new opportunities in subsurface geoscience, reservoir characterisation, and G&G data analytics. If you are looking for a detail-oriented geoscientist with proven industry experience, I would love to hear from you.
+      </p>
+      <div class="contact-links reveal">
+        <a href="mailto:judeeshiemomoh@gmail.com" class="contact-link">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          judeeshiemomoh@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/jude-e-121bb4159" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn Profile
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Jude Anoghena Eshiemomoh &nbsp;·&nbsp; Petroleum Geoscientist</p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
